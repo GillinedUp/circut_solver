@@ -2,17 +2,17 @@ package com.gillinedup.graph;
 
 import java.util.*;
 
-public class CycleTranform {
-    private List<Graph> cyclesASGraphList;
+public class CycleTransform {
+    private List<Graph> cyclesAsGraphList;
     private List<List<Edge>> cycles;
 
-    public CycleTranform(List<Graph> cyclesList) {
-        this.cyclesASGraphList = cyclesList;
+    public CycleTransform(List<Graph> cyclesList) {
+        this.cyclesAsGraphList = cyclesList;
     }
 
     public List<List<Edge>> getCyclesFromGraphs() {
         this.cycles = new ArrayList<>();
-        for(Graph g : cyclesASGraphList) {
+        for(Graph g : cyclesAsGraphList) {
             cycles.add(g.getEdges());
         }
         return cycles;
@@ -57,4 +57,44 @@ public class CycleTranform {
         }
         return resultCycles;
     }
+
+    public void sortCyclesByLength(List<List<Edge>> cycles) {
+        cycles.sort((l1, l2) -> (l1.size() - l2.size()));
+    }
+
+    public void removeRedundantCycles(List<List<Edge>> cycles) {
+        Set<Edge> appearedEdgesSet = new HashSet<>();
+        boolean foundNewEdge = false;
+//        for (List<Edge> cycle : cycles) {
+//            for (Edge e : cycle) {
+//                if(isNewEdge(appearedEdgesSet, e)) {
+//                    appearedEdgesSet.add(e);
+//                    foundNewEdge = true;
+//                }
+//            }
+//            if(!foundNewEdge) {
+//                cycles.remove(cycle);
+//            }
+//            foundNewEdge = false;
+//        }
+        for (int i = 0; i < cycles.size(); i++) {
+            for (Edge e : cycles.get(i)) {
+                if(isNewEdge(appearedEdgesSet, e)) {
+                    appearedEdgesSet.add(e);
+                    foundNewEdge = true;
+                }
+            }
+            if(!foundNewEdge) {
+                cycles.remove(i);
+                i--;
+            }
+            foundNewEdge = false;
+        }
+    }
+
+    public boolean isNewEdge(Set<Edge> appearedEdgesSet, Edge e) {
+        return !(appearedEdgesSet.contains(e) ||
+                appearedEdgesSet.contains(new Edge(e.getDestination(), e.getSource())));
+    }
+
 }

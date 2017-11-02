@@ -30,11 +30,14 @@ public class Edge {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((destination == null) ? 0 : destination.hashCode());
-		result = prime * result + ((source == null) ? 0 : source.hashCode());
-		return result;
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + ((destination == null) ? 0 : destination.hashCode());
+//		result = prime * result + ((source == null) ? 0 : source.hashCode());
+//		return result;
+		int x = source.getId();
+		int y = destination.getId();
+		return ((x + y)*(x + y + 1))/2 + y;
 	}
 
 	@Override
