@@ -1,14 +1,29 @@
 package com.gillinedup.graph;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Edge {
 	private final Vertex source;
 	private final Vertex destination;
 	private double weight;
+	private List<CurrentDirection> currents;
+	private boolean isVoltage;
 
 	public Edge(Vertex source, Vertex destination) {
 		this.source = source;
 		this.destination = destination;
 		this.weight = 0.0;
+		this.currents = new ArrayList<>();
+		this.isVoltage = false;
+	}
+
+	public Edge(Vertex source, Vertex destination, double weight) {
+		this.source = source;
+		this.destination = destination;
+		this.weight = weight;
+        this.currents = new ArrayList<>();
+        this.isVoltage = false;
 	}
 
 	public Vertex getDestination() {
@@ -23,7 +38,27 @@ public class Edge {
 	    this.weight = weight;
     }
 
-	@Override
+    public double getWeight() {
+        return weight;
+    }
+
+    public List<CurrentDirection> getCurrents() {
+        return currents;
+    }
+
+    public void setCurrents(List<CurrentDirection> currents) {
+        this.currents = currents;
+    }
+
+    public boolean isVoltage() {
+        return isVoltage;
+    }
+
+    public void setVoltage() {
+	    isVoltage = true;
+    }
+
+    @Override
 	public String toString() {
 		return source + "-" + destination;
 	}

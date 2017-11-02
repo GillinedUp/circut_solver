@@ -65,18 +65,6 @@ public class CycleTransform {
     public void removeRedundantCycles(List<List<Edge>> cycles) {
         Set<Edge> appearedEdgesSet = new HashSet<>();
         boolean foundNewEdge = false;
-//        for (List<Edge> cycle : cycles) {
-//            for (Edge e : cycle) {
-//                if(isNewEdge(appearedEdgesSet, e)) {
-//                    appearedEdgesSet.add(e);
-//                    foundNewEdge = true;
-//                }
-//            }
-//            if(!foundNewEdge) {
-//                cycles.remove(cycle);
-//            }
-//            foundNewEdge = false;
-//        }
         for (int i = 0; i < cycles.size(); i++) {
             for (Edge e : cycles.get(i)) {
                 if(isNewEdge(appearedEdgesSet, e)) {
