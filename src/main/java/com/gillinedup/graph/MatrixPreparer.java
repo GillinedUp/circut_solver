@@ -8,19 +8,19 @@ import java.util.Map;
 public class MatrixPreparer {
     private List<List<Edge>> cycles;
     private double[][] matrix;
-    private double[] vector;
+    private double[][] vector;
     private Map<Edge, List<CurrentDirection>> edgeCurrentsMap;
 
     public MatrixPreparer(List<List<Edge>> cycles) {
         this.cycles = cycles;
         int n = cycles.size();
         matrix = new double[n][n];
-        vector = new double[n];
+        vector = new double[n][n];
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 matrix[i][j] = 0.0;
             }
-            vector[i] = 0.0;
+            vector[i][0] = 0.0;
         }
         edgeCurrentsMap = new HashMap<>();
     }
@@ -47,15 +47,15 @@ public class MatrixPreparer {
         }
     }
 
-    public void fillRow(int i) {
+    void fillRow(int i) {
         List<Edge> currentRow = cycles.get(i);
         for (int j = 0; j < currentRow.size(); j++) {
             Edge currentEdge = currentRow.get(j);
             if (currentEdge.isVoltage()) {
                 if (currentEdge.getVoltageDirection() < 0) {
-                    vector[i] = currentEdge.getWeight();
+                    vector[i][0] = currentEdge.getWeight();
                 } else {
-                    vector[i] = -currentEdge.getWeight();
+                    vector[i][0] = -currentEdge.getWeight();
                 }
             } else {
                 if (currentEdge.getWeight() != 0.0) {
@@ -66,7 +66,7 @@ public class MatrixPreparer {
         }
     }
 
-    public void checkInfoAboutEdge(int i, Edge currentEdge) {
+    void checkInfoAboutEdge(int i, Edge currentEdge) {
         Edge reversedEdge = new Edge(
                 currentEdge.getDestination(),
                 currentEdge.getSource(),
@@ -101,7 +101,7 @@ public class MatrixPreparer {
         return matrix;
     }
 
-    public double[] getVector() {
+    public double[][] getVector() {
         return vector;
     }
 }

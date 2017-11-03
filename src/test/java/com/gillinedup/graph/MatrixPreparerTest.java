@@ -120,8 +120,8 @@ public class MatrixPreparerTest {
         assertEquals(-2.0, matrixPreparer.getMatrix()[0][1], 1e-6);
         assertEquals(-2.0, matrixPreparer.getMatrix()[1][0], 1e-6);
         assertEquals(6.0, matrixPreparer.getMatrix()[1][1], 1e-6);
-        assertEquals(7.0, matrixPreparer.getVector()[0], 1e-6);
-        assertEquals(-28.0, matrixPreparer.getVector()[1], 1e-6);
+        assertEquals(7.0, matrixPreparer.getVector()[0][0], 1e-6);
+        assertEquals(-28.0, matrixPreparer.getVector()[1][0], 1e-6);
     }
 
     @Test
@@ -145,8 +145,8 @@ public class MatrixPreparerTest {
         MatrixPreparer matrixPreparer = new MatrixPreparer(processedCycles);
         matrixPreparer.fillMap();
         matrixPreparer.fillMatrix();
-        assertEquals(0.0, matrixPreparer.getVector()[0], 1e-6);
-        assertEquals(0.0, matrixPreparer.getVector()[1], 1e-6);
-        assertEquals(24.0, matrixPreparer.getVector()[2], 1e-6);
+        assertEquals(0.0, matrixPreparer.getVector()[0][0], 1e-6);
+        assertEquals(0.0, matrixPreparer.getVector()[1][0], 1e-6);
+        assertEquals(24.0, matrixPreparer.getVector()[2][0], 1e-6);
     }
 }

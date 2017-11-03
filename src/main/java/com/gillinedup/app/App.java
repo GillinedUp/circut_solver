@@ -28,36 +28,13 @@ public class App {
 		List<List<Edge>> processedCycles = cycleTransform.removeRedundantEdges(rawCycles);
 		cycleTransform.sortCyclesByLength(processedCycles);
 		cycleTransform.removeRedundantCycles(processedCycles);
-//        for(List<Edge> cycle : processedCycles) {
-//            for (Edge e : cycle) {
-//                System.out.print(e + " ");
-//            }
-//            System.out.println();
-//        }
         MatrixPreparer matrixPreparer = new MatrixPreparer(processedCycles);
         matrixPreparer.fillMap();
         matrixPreparer.fillMatrix();
-//        double[][] matrix = matrixPreparer.getMatrix();
-//        double[] vector = matrixPreparer.getVector();
-//        for (double[] aMatrix : matrix) {
-//            for (double anAMatrix : aMatrix) {
-//                System.out.print(anAMatrix + " ");
-//            }
-//            System.out.println();
-//        }
-//        for (double aVector : vector) {
-//            System.out.println(aVector);
-//        }
-        double[] vector1 = matrixPreparer.getVector();
-        int n = vector1.length;
-        double[][] vector = new double[n][1];
-        for (int i = 0; i < n; i++) {
-            vector[i][0] = vector1[i];
-        }
         Matrix a = new Matrix(matrixPreparer.getMatrix());
-        Matrix b = new Matrix(vector);
+        Matrix b = new Matrix(matrixPreparer.getVector());
         Matrix x = a.solve(b);
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < x.getRowDimension(); i++) {
             System.out.println(x.get(i, 0));
         }
 
