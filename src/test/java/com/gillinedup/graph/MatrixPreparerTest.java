@@ -73,7 +73,6 @@ public class MatrixPreparerTest {
     @Test
     public void testFillMatrix() {
         Graph g = new Graph();
-        g.addBidirectionalVoltageEdge(1, 2, 24.0);
         g.addBidirectionalEdge(1,2, 4.0);
         g.addBidirectionalVoltageEdge(1,4, 28.0);
         g.addBidirectionalEdge(2,3, 1.0);
@@ -95,5 +94,59 @@ public class MatrixPreparerTest {
         assertEquals(-2.0, matrixPreparer.getMatrix()[0][1], 1e-6);
         assertEquals(-2.0, matrixPreparer.getMatrix()[1][0], 1e-6);
         assertEquals(6.0, matrixPreparer.getMatrix()[1][1], 1e-6);
+    }
+
+    @Test
+    public void testVoltage() {
+        Graph g = new Graph();
+        g.addBidirectionalEdge(1,2, 4.0);
+        g.addBidirectionalVoltageEdge(4,1, 28.0);
+        g.addBidirectionalEdge(2,3, 1.0);
+        g.addBidirectionalEdge(2,5, 2.0);
+        g.addBidirectionalVoltageEdge(6,3, 7.0);
+        g.addBidirectionalEdge(4,5, 0.0);
+        g.addBidirectionalEdge(5,6, 0.0);
+        CycleUtil cycleUtil = new CycleUtil(g);
+        List<Graph> cycles = cycleUtil.listAllCycles();
+        CycleTransform cycleTransform = new CycleTransform(cycles);
+        List<List<Edge>> rawCycles = cycleTransform.getCyclesFromGraphs();
+        List<List<Edge>> processedCycles = cycleTransform.removeRedundantEdges(rawCycles);
+        cycleTransform.sortCyclesByLength(processedCycles);
+        cycleTransform.removeRedundantCycles(processedCycles);
+        MatrixPreparer matrixPreparer = new MatrixPreparer(processedCycles);
+        matrixPreparer.fillMap();
+        matrixPreparer.fillMatrix();
+        assertEquals(3.0, matrixPreparer.getMatrix()[0][0], 1e-6);
+        assertEquals(-2.0, matrixPreparer.getMatrix()[0][1], 1e-6);
+        assertEquals(-2.0, matrixPreparer.getMatrix()[1][0], 1e-6);
+        assertEquals(6.0, matrixPreparer.getMatrix()[1][1], 1e-6);
+        assertEquals(7.0, matrixPreparer.getVector()[0], 1e-6);
+        assertEquals(-28.0, matrixPreparer.getVector()[1], 1e-6);
+    }
+
+    @Test
+    public void testVoltage2() {
+        Graph g = new Graph();
+        g.addBidirectionalVoltageEdge(2, 1, 24.0);
+        g.addBidirectionalEdge(1,3, 0.0);
+        g.addBidirectionalEdge(3,4, 150.0);
+        g.addBidirectionalEdge(3,5, 50.0);
+        g.addBidirectionalEdge(4,5, 100.0);
+        g.addBidirectionalEdge(4,6, 300.0);
+        g.addBidirectionalEdge(5,6, 250.0);
+        g.addBidirectionalEdge(6,2, 0.0);
+        CycleUtil cycleUtil = new CycleUtil(g);
+        List<Graph> cycles = cycleUtil.listAllCycles();
+        CycleTransform cycleTransform = new CycleTransform(cycles);
+        List<List<Edge>> rawCycles = cycleTransform.getCyclesFromGraphs();
+        List<List<Edge>> processedCycles = cycleTransform.removeRedundantEdges(rawCycles);
+        cycleTransform.sortCyclesByLength(processedCycles);
+        cycleTransform.removeRedundantCycles(processedCycles);
+        MatrixPreparer matrixPreparer = new MatrixPreparer(processedCycles);
+        matrixPreparer.fillMap();
+        matrixPreparer.fillMatrix();
+        assertEquals(0.0, matrixPreparer.getVector()[0], 1e-6);
+        assertEquals(0.0, matrixPreparer.getVector()[1], 1e-6);
+        assertEquals(24.0, matrixPreparer.getVector()[2], 1e-6);
     }
 }

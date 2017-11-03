@@ -29,22 +29,6 @@ public class MatrixPreparer {
         for (int i = 0; i < cycles.size(); i++) {
             List<Edge> cycle = cycles.get(i);
             for (Edge edge : cycle) {
-//                Edge reversedEdge = new Edge(
-//                        edge.getDestination(),
-//                        edge.getSource(),
-//                        edge.getWeight()
-//                );
-//                if (!edgeCurrentsMap.containsKey(edge)) {
-//                    if (!edgeCurrentsMap.containsKey(reversedEdge)) {
-//                        List<CurrentDirection> currentDirections = new ArrayList<>();
-//                        currentDirections.add(new CurrentDirection(i, true, edge.getWeight()));
-//                        edgeCurrentsMap.put(edge, currentDirections);
-//                    } else {
-//                        edgeCurrentsMap.get(reversedEdge).add(new CurrentDirection(i, true, edge.getWeight()));
-//                    }
-//                } else {
-//                    edgeCurrentsMap.get(edge).add(new CurrentDirection(i, true, edge.getWeight()));
-//                }
                 if (!edgeCurrentsMap.containsKey(edge)) {
                     List<CurrentDirection> currentDirections = new ArrayList<>();
                     currentDirections.add(new CurrentDirection(i, true, edge.getWeight()));
@@ -68,7 +52,11 @@ public class MatrixPreparer {
         for (int j = 0; j < currentRow.size(); j++) {
             Edge currentEdge = currentRow.get(j);
             if (currentEdge.isVoltage()) {
-                vector[i] = currentEdge.getWeight(); // TODO: take direction into account
+                if (currentEdge.getVoltageDirection() < 0) {
+                    vector[i] = currentEdge.getWeight();
+                } else {
+                    vector[i] = -currentEdge.getWeight();
+                }
             } else {
                 if (currentEdge.getWeight() != 0.0) {
                     matrix[i][i] += currentEdge.getWeight();
@@ -111,5 +99,9 @@ public class MatrixPreparer {
 
     public double[][] getMatrix() {
         return matrix;
+    }
+
+    public double[] getVector() {
+        return vector;
     }
 }
