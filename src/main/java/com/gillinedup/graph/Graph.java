@@ -111,6 +111,10 @@ public class Graph {
 	}
 
 	public void addBidirectionalEdge(int id1, int id2) {
+        addBidirectionalEdge(id1, id2, 0.0);
+	}
+
+	public void addBidirectionalEdge(int id1, int id2, double w) {
 		Vertex sourceVertex = new Vertex(id1);
 		Vertex destinationVertex = new Vertex(id2);
 
@@ -122,9 +126,30 @@ public class Graph {
 			vertices.add(destinationVertex);
 		}
 
-		edges.add(new Edge(sourceVertex, destinationVertex));
-		edges.add(new Edge(destinationVertex, sourceVertex));
+		edges.add(new Edge(sourceVertex, destinationVertex, w));
+		edges.add(new Edge(destinationVertex, sourceVertex, w));
 	}
+
+    public void addBidirectionalVoltageEdge(int id1, int id2, double w) {
+        Vertex sourceVertex = new Vertex(id1);
+        Vertex destinationVertex = new Vertex(id2);
+
+        if (!vertices.contains(sourceVertex)) {
+            vertices.add(sourceVertex);
+        }
+
+        if (!vertices.contains(destinationVertex)) {
+            vertices.add(destinationVertex);
+        }
+
+        Edge edge1 = new Edge(sourceVertex, destinationVertex, w);
+        edge1.setVoltage();
+        Edge edge2 = new Edge(destinationVertex, sourceVertex, w);
+        edge2.setVoltage();
+
+        edges.add(edge1);
+        edges.add(edge2);
+    }
 
 	@Override
 	public String toString() {

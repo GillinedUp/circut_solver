@@ -93,4 +93,8 @@ public class MatrixPreparer {
             }
         }
     }
+
+    public Map<Edge, List<CurrentDirection>> getEdgeCurrentsMap() {
+        return edgeCurrentsMap;
+    }
 }

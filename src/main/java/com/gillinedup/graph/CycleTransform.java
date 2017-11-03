@@ -10,6 +10,10 @@ public class CycleTransform {
         this.cyclesAsGraphList = cyclesList;
     }
 
+    public List<List<Edge>> getCycles() {
+        return cycles;
+    }
+
     public List<List<Edge>> getCyclesFromGraphs() {
         this.cycles = new ArrayList<>();
         for(Graph g : cyclesAsGraphList) {
