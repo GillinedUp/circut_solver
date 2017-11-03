@@ -3,10 +3,10 @@ package com.gillinedup.graph;
 import java.util.*;
 
 public class CycleTransform {
-    private List<Graph> cyclesAsGraphList;
+    private List<MyGraph> cyclesAsGraphList;
     private List<List<Edge>> cycles;
 
-    public CycleTransform(List<Graph> cyclesList) {
+    public CycleTransform(List<MyGraph> cyclesList) {
         this.cyclesAsGraphList = cyclesList;
     }
 
@@ -16,7 +16,7 @@ public class CycleTransform {
 
     public List<List<Edge>> getCyclesFromGraphs() {
         this.cycles = new ArrayList<>();
-        for(Graph g : cyclesAsGraphList) {
+        for(MyGraph g : cyclesAsGraphList) {
             cycles.add(g.getEdges());
         }
         return cycles;

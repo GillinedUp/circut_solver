@@ -10,6 +10,7 @@ public class Edge {
 	private List<CurrentDirection> currents;
 	private boolean isVoltage;
 	private int voltageDirection;
+	private boolean isVisited;
 
 	public Edge(Vertex source, Vertex destination) {
 		this.source = source;
@@ -18,6 +19,7 @@ public class Edge {
 		this.currents = new ArrayList<>();
 		this.isVoltage = false;
 		this.voltageDirection = 0; // - -> + == > 0; + -> - == < 0
+        this.isVisited = false;
 	}
 
 	public Edge(Vertex source, Vertex destination, double weight) {
@@ -27,7 +29,16 @@ public class Edge {
         this.currents = new ArrayList<>();
         this.isVoltage = false;
         this.voltageDirection = 0;
+        this.isVisited = false;
 	}
+
+    public boolean isVisited() {
+        return isVisited;
+    }
+
+    public void setVisited(boolean visited) {
+        isVisited = visited;
+    }
 
     public int getVoltageDirection() {
         return voltageDirection;

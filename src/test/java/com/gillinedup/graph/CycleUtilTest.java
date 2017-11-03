@@ -11,20 +11,20 @@ public class CycleUtilTest {
 
 	@Test
 	public void testNumberOfAllCycles1() {
-		Graph g = new Graph();
+		MyGraph g = new MyGraph();
 		g.addBidirectionalEdge(new Point(0, 0), new Point(0, 1));
 		g.addBidirectionalEdge(new Point(0, 1), new Point(3, 1));
 		g.addBidirectionalEdge(new Point(3, 1), new Point(3, 0));
 		g.addBidirectionalEdge(new Point(3, 0), new Point(0, 0));
 
 		CycleUtil cycleUtil = new CycleUtil(g);
-		List<Graph> cycles = cycleUtil.listAllCycles();
+		List<MyGraph> cycles = cycleUtil.listAllCycles();
 		assertEquals(1, cycles.size());
 	}
 
 	@Test
 	public void testNumberOfAllCycles2() {
-		Graph g = new Graph();
+		MyGraph g = new MyGraph();
 		g.addBidirectionalEdge(new Point(0, 0), new Point(0, 1));
 		g.addBidirectionalEdge(new Point(0, 1), new Point(3, 1));
 		g.addBidirectionalEdge(new Point(3, 1), new Point(3, 0));
@@ -34,13 +34,13 @@ public class CycleUtilTest {
 		g.addBidirectionalEdge(new Point(6, 0), new Point(3, 0));
 
 		CycleUtil cycleUtil = new CycleUtil(g);
-		List<Graph> cycles = cycleUtil.listAllCycles();
+		List<MyGraph> cycles = cycleUtil.listAllCycles();
 		assertEquals(3, cycles.size());
 	}
 
 	@Test
 	public void testNumberOfAllCycles3() {
-		Graph g = new Graph();
+		MyGraph g = new MyGraph();
 		g.addBidirectionalEdge(new Point(0, 0), new Point(0, 1));
 		g.addBidirectionalEdge(new Point(0, 1), new Point(0, 2));
 		g.addBidirectionalEdge(new Point(0, 1), new Point(1, 1));
@@ -55,13 +55,13 @@ public class CycleUtilTest {
 		g.addBidirectionalEdge(new Point(2, 0), new Point(1, 0));
 
 		CycleUtil cycleUtil = new CycleUtil(g);
-		List<Graph> cycles = cycleUtil.listAllCycles();
+		List<MyGraph> cycles = cycleUtil.listAllCycles();
 		assertEquals(15, cycles.size());
 	}
 
 	@Test
 	public void testNumberOfAllCycles4() {
-		Graph g = new Graph();
+		MyGraph g = new MyGraph();
 		g.addBidirectionalEdge(new Point(0, 0), new Point(0, 1));
 		g.addBidirectionalEdge(new Point(0, 1), new Point(3, 1));
 		g.addBidirectionalEdge(new Point(3, 1), new Point(3, 0));
@@ -71,29 +71,29 @@ public class CycleUtilTest {
 		g.addBidirectionalEdge(new Point(6, 0), new Point(3, 0));
 
 		CycleUtil cycleUtil = new CycleUtil(g);
-		List<Graph> cycles = cycleUtil.listAllCycles();
+		List<MyGraph> cycles = cycleUtil.listAllCycles();
 		assertEquals(3, cycles.size());
 	}
 
 	@Test
 	public void testNumberOfAllCycles5() {
-		Graph g = new Graph();
+		MyGraph g = new MyGraph();
 		g.addBidirectionalEdge(new Point(0, 0), new Point(0, 0));
 		CycleUtil cycleUtil = new CycleUtil(g);
-		List<Graph> cycles = cycleUtil.listAllCycles();
+		List<MyGraph> cycles = cycleUtil.listAllCycles();
 		assertEquals(0, cycles.size());
 	}
 
 	@Test
 	public void testNoCycles1() {
-		Graph g = new Graph();
+		MyGraph g = new MyGraph();
 		g.addBidirectionalEdge(new Point(0, 0), new Point(0, 1));
 		g.addBidirectionalEdge(new Point(0, 1), new Point(3, 1));
 		g.addBidirectionalEdge(new Point(3, 1), new Point(3, 0));
 		g.addBidirectionalEdge(new Point(3, 0), new Point(0, 99));
 
 		CycleUtil cycleUtil = new CycleUtil(g);
-		List<Graph> cycles = cycleUtil.listAllCycles();
+		List<MyGraph> cycles = cycleUtil.listAllCycles();
 		assertEquals(0, cycles.size());
 	}
 

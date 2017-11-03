@@ -7,31 +7,31 @@ import java.util.List;
 import java.util.Set;
 
 public class CycleUtil {
-	private Graph originalGraph;
+	private MyGraph originalGraph;
 
-	public CycleUtil(Graph originalGraph) {
+	public CycleUtil(MyGraph originalGraph) {
 		this.originalGraph = originalGraph;
 	}
 
 	/**
-	 * Returns all cycles in the Graph.
+	 * Returns all cycles in the MyGraph.
 	 * 
-	 * @return A <code>List</code> of <code>Graph</code> holding all the cycles.
+	 * @return A <code>List</code> of <code>MyGraph</code> holding all the cycles.
 	 * 
 	 * @throws <code>IllegalArgumentException</code> if graph is
 	 *         <code>null</code>.
 	 */
-	public List<Graph> listAllCycles() {
+	public List<MyGraph> listAllCycles() {
 		if (originalGraph == null) {
-			throw new IllegalArgumentException("Graph cannot be null!");
+			throw new IllegalArgumentException("MyGraph cannot be null!");
 		}
 		List<List<Vertex>> cycleBasis = computeCycleBasisOfGraph(originalGraph);
-		List<Graph> allCycles = listAllCyclesFromBasis(originalGraph, cycleBasis);
+		List<MyGraph> allCycles = listAllCyclesFromBasis(originalGraph, cycleBasis);
 		return allCycles;
 	}
 
 	/**
-	 * Computes and returns a cycle basis of <code>Graph</code> g.
+	 * Computes and returns a cycle basis of <code>MyGraph</code> g.
 	 * 
 	 * A cycle basis of an undirected graph is a set of simple cycles that forms
 	 * a basis of the cycle space of the graph. That is, it is a minimal set of
@@ -41,20 +41,20 @@ public class CycleUtil {
 	 * @see http://en.wikipedia.org/wiki/Cycle_basis
 	 * 
 	 * @param g
-	 *            the <code>Graph</code> object for which we want to compute the
+	 *            the <code>MyGraph</code> object for which we want to compute the
 	 *            cycle basis.
 	 * 
 	 * @return A <code>List</code> of cycles (<code>List</code> of
 	 *         <code>Vertex</code>) that form the cycle basis of <code>g</code>.
 	 */
-	private List<List<Vertex>> computeCycleBasisOfGraph(Graph g) {
-		// Copy of the original Graph. We need a copy because we are going to alter it.
-		Graph graphCopy = new Graph(new ArrayList<Vertex>(g.getVertices()), new ArrayList<Edge>(g.getEdges()));
+	private List<List<Vertex>> computeCycleBasisOfGraph(MyGraph g) {
+		// Copy of the original MyGraph. We need a copy because we are going to alter it.
+		MyGraph graphCopy = new MyGraph(new ArrayList<Vertex>(g.getVertices()), new ArrayList<Edge>(g.getEdges()));
 
 		List<Edge> backEdges = new ArrayList<Edge>(graphCopy.getEdges());
 
 		// Create a minimal spanning tree and its associated set of back edges.
-		Graph minimalSpanningTree = createMinimalSpanningTree(graphCopy);
+		MyGraph minimalSpanningTree = createMinimalSpanningTree(graphCopy);
 
 		backEdges.removeAll(minimalSpanningTree.getEdges());
 		//backEdges = cleanEdges(backEdges);
@@ -84,19 +84,19 @@ public class CycleUtil {
 	}
 
 	/**
-	 * Computes and returns all cycles in the Graph based on a cycle basis.
+	 * Computes and returns all cycles in the MyGraph based on a cycle basis.
 	 * 
 	 * @param g
-	 *            the <code>Graph</code>
+	 *            the <code>MyGraph</code>
 	 * @param basisCycles
 	 *            <code>List</code> of cycles (<code>List</code> of
 	 *            <code>Vertex</code>) that form the cycle basis of
 	 *            <code>g</code>.
-	 * @return A <code>List</code> of <code>Graph</code> representing all the
+	 * @return A <code>List</code> of <code>MyGraph</code> representing all the
 	 *         cycles.
 	 * 
 	 */
-	private List<Graph> listAllCyclesFromBasis(Graph g, List<List<Vertex>> basisCycles) {
+	private List<MyGraph> listAllCyclesFromBasis(MyGraph g, List<List<Vertex>> basisCycles) {
 		// Now that we got all the base cycles we can create their incidence
 		// vectors
 		List<BigInteger> incidenceVectors = new ArrayList<BigInteger>();
@@ -120,9 +120,9 @@ public class CycleUtil {
 			}
 		}
 
-		List<Graph> allCycles = new ArrayList<Graph>();
+		List<MyGraph> allCycles = new ArrayList<MyGraph>();
 		for (BigInteger incidenceVector : incidenceCombinations) {
-			Graph cycle = cycleFromIncidenceVector(incidenceVector, g.getEdges());
+			MyGraph cycle = cycleFromIncidenceVector(incidenceVector, g.getEdges());
 			allCycles.add(cycle);
 		}
 
@@ -130,13 +130,13 @@ public class CycleUtil {
 	}
 
 	/**
-	 * Generates and returns a minimal spanning tree of Graph g.
+	 * Generates and returns a minimal spanning tree of MyGraph g.
 	 * 
 	 * @param g
-	 *            the <code>Graph</code> object
+	 *            the <code>MyGraph</code> object
 	 * @return A minimal spanning tree of <code>g</code>
 	 */
-	private Graph createMinimalSpanningTree(Graph g) {
+	private MyGraph createMinimalSpanningTree(MyGraph g) {
 		// Create a minimal spanning tree and its associated set of back edges.
 		Vertex start = g.getVertices().get(0);
 
@@ -146,13 +146,13 @@ public class CycleUtil {
 		// A minimal spanning tree is basically the original graph (all vertices) but without the back-edges 
 		List<Edge> spanningTreeEdges = new ArrayList<Edge>(g.getEdges());
 		spanningTreeEdges.removeAll(backEdges);
-		Graph minimalSpanningTree = new Graph(g.getVertices(), spanningTreeEdges);
+		MyGraph minimalSpanningTree = new MyGraph(g.getVertices(), spanningTreeEdges);
 		return minimalSpanningTree;
 	}
 
 	/**
-	 * Returns a Set of back edges of Graph g while removing these edges from
-	 * the Graph.
+	 * Returns a Set of back edges of MyGraph g while removing these edges from
+	 * the MyGraph.
 	 * 
 	 * It is a DFS where we mark an edge as a back-edge (and remove it from the
 	 * graph) if it leads to an already visited vertex.
@@ -170,7 +170,7 @@ public class CycleUtil {
 	 * 
 	 * @return Set<Edge> of back-edges
 	 */
-	private Set<Edge> backEdges(Graph g, Vertex root, Vertex current, Set<Vertex> visited, Set<Edge> backEdges) {
+	private Set<Edge> backEdges(MyGraph g, Vertex root, Vertex current, Set<Vertex> visited, Set<Edge> backEdges) {
 		visited.add(current);
 
 		for (Vertex n : g.getNeighbors(current)) {
@@ -196,10 +196,10 @@ public class CycleUtil {
 
 	/**
 	 * 
-	 * Finds the cycle in <code>Graph g</code>
+	 * Finds the cycle in <code>MyGraph g</code>
 	 * 
 	 * @param g
-	 *            the <code>Graph</code>
+	 *            the <code>MyGraph</code>
 	 * @param root
 	 *            Start vertex
 	 * @param current
@@ -209,7 +209,7 @@ public class CycleUtil {
 	 * @param stack
 	 *            Stack that hold the sequence of vertices on the path
 	 */
-	private void findCycle(Graph g, Vertex root, Vertex current, Set<Vertex> visited, List<Vertex> stack, List<List<Vertex>> basisCycles) {
+	private void findCycle(MyGraph g, Vertex root, Vertex current, Set<Vertex> visited, List<Vertex> stack, List<List<Vertex>> basisCycles) {
 		visited.add(current);
 		stack.add(current);
 
@@ -229,7 +229,7 @@ public class CycleUtil {
 	 * Generates the incidence vector of a cycle.<br>
 	 * <br>
 	 * 
-	 * Assume that the ordered list of all edges in the original Graph is: <br>
+	 * Assume that the ordered list of all edges in the original MyGraph is: <br>
 	 * <br>
 	 * 
 	 * (1,2) (2,3) (2,6) (3,4) (3,6) (4,5) (4,6) (5,6) <br>
@@ -244,7 +244,7 @@ public class CycleUtil {
 	 * @param cycle
 	 *            List<Vertex> list of vertices in the cycle
 	 * @param originalEdges
-	 *            The ordered list of edges in the original Graph
+	 *            The ordered list of edges in the original MyGraph
 	 * @return The incidence vector describing the <code>cycle</code> in form of
 	 *         a <code>BigInteger</code> based on <code>originalEdges</code>.
 	 */
@@ -277,7 +277,7 @@ public class CycleUtil {
 	 * Generates a cycle out of an incidence vector.<br>
 	 * <br>
 	 * 
-	 * Assume that the ordered list of all edges in the original Graph is: <br>
+	 * Assume that the ordered list of all edges in the original MyGraph is: <br>
 	 * <br>
 	 * 
 	 * (1,2) (2,3) (2,6) (3,4) (3,6) (4,5) (4,6) (5,6) <br>
@@ -288,12 +288,12 @@ public class CycleUtil {
 	 * @param vector
 	 *            A BigInteger representing the incidence vector of a cycle
 	 * @param originalEdges
-	 *            An ordered list containing all the edges of a Graph
-	 * @return A <code>Graph</code> object representing the cycle described by
+	 *            An ordered list containing all the edges of a MyGraph
+	 * @return A <code>MyGraph</code> object representing the cycle described by
 	 *         the incidence vector <code>vector</code> based on
 	 *         <code>originalEdges</code>.
 	 */
-	private Graph cycleFromIncidenceVector(BigInteger vector, List<Edge> originalEdges) {
+	private MyGraph cycleFromIncidenceVector(BigInteger vector, List<Edge> originalEdges) {
 		List<Vertex> cycleVertices = new ArrayList<Vertex>();
 		List<Edge> cycleEdges = new ArrayList<Edge>();
 
@@ -314,7 +314,7 @@ public class CycleUtil {
 			}
 		}
 
-		return new Graph(cycleVertices, cycleEdges);
+		return new MyGraph(cycleVertices, cycleEdges);
 	}
 
 	/**

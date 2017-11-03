@@ -1,15 +1,12 @@
 package com.gillinedup.graph;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class MatrixPreparer {
     private List<List<Edge>> cycles;
     private double[][] matrix;
     private double[][] vector;
-    private Map<Edge, List<CurrentDirection>> edgeCurrentsMap;
+    private LinkedHashMap<Edge, List<CurrentDirection>> edgeCurrentsMap;
 
     public MatrixPreparer(List<List<Edge>> cycles) {
         this.cycles = cycles;
@@ -22,7 +19,7 @@ public class MatrixPreparer {
             }
             vector[i][0] = 0.0;
         }
-        edgeCurrentsMap = new HashMap<>();
+        edgeCurrentsMap = new LinkedHashMap<>();
     }
 
     public void fillMap() {
@@ -49,8 +46,7 @@ public class MatrixPreparer {
 
     void fillRow(int i) {
         List<Edge> currentRow = cycles.get(i);
-        for (int j = 0; j < currentRow.size(); j++) {
-            Edge currentEdge = currentRow.get(j);
+        for (Edge currentEdge : currentRow) {
             if (currentEdge.isVoltage()) {
                 if (currentEdge.getVoltageDirection() < 0) {
                     vector[i][0] = currentEdge.getWeight();

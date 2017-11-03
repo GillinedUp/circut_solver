@@ -6,40 +6,40 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Graph {
+public class MyGraph {
 	private final List<Vertex> vertices;
 	private final List<Edge> edges;
 
 	/**
-	 * Constructor for <code>Graph</code>.
+	 * Constructor for <code>MyGraph</code>.
 	 * 
 	 */
-	public Graph() {
+	public MyGraph() {
 		vertices = new ArrayList<Vertex>();
 		edges = new ArrayList<Edge>();
 	}
 
 	/**
-	 * Constructor for <code>Graph</code>.
+	 * Constructor for <code>MyGraph</code>.
 	 * 
 	 * @param vertices
 	 *            <code>List</code> of <code>Vertex</code>s in the
-	 *            <code>Graph</code>.
+	 *            <code>MyGraph</code>.
 	 * @param edges
 	 *            <code>List</code> of <code>Edge</code>s in the
-	 *            <code>Graph</code>.
+	 *            <code>MyGraph</code>.
 	 */
-	public Graph(List<Vertex> vertices, List<Edge> edges) {
+	public MyGraph(List<Vertex> vertices, List<Edge> edges) {
 		this.vertices = vertices;
 		this.edges = edges;
 	}
 
 	/**
 	 * Return the <code>List</code> of <code>Vertex</code>s in the
-	 * <code>Graph</code>.
+	 * <code>MyGraph</code>.
 	 * 
 	 * @return <code>List</code> of <code>Vertex</code>s in the
-	 *         <code>Graph</code> .
+	 *         <code>MyGraph</code> .
 	 */
 	public List<Vertex> getVertices() {
 		return vertices;
@@ -47,9 +47,9 @@ public class Graph {
 
 	/**
 	 * Return the <code>List</code> of <code>Edge</code>s in the
-	 * <code>Graph</code>.
+	 * <code>MyGraph</code>.
 	 * 
-	 * @return <code>List</code> of <code>Edge</code>s in the <code>Graph</code>
+	 * @return <code>List</code> of <code>Edge</code>s in the <code>MyGraph</code>
 	 *         .
 	 */
 	public List<Edge> getEdges() {
@@ -85,7 +85,7 @@ public class Graph {
 	}
 
 	/**
-	 * Add forward and backwards (directed) edges to the <code>Graph</code>
+	 * Add forward and backwards (directed) edges to the <code>MyGraph</code>
 	 * connecting two <code>Vertex</code> that hold data <code>src</code> and
 	 * <code>dest</code>.
 	 * 
@@ -155,6 +155,6 @@ public class Graph {
 
 	@Override
 	public String toString() {
-		return "Graph [vertices=" + vertices + ", edges=" + edges + "]";
+		return "MyGraph [vertices=" + vertices + ", edges=" + edges + "]";
 	}
 }

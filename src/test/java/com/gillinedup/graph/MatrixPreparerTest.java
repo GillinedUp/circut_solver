@@ -12,7 +12,7 @@ public class MatrixPreparerTest {
 
     @Test
     public void testCheckInfoAboutEdge() {
-        Graph g = new Graph();
+        MyGraph g = new MyGraph();
         g.addBidirectionalVoltageEdge(1, 2, 24.0);
         g.addBidirectionalEdge(1,3, 0.0);
         g.addBidirectionalEdge(3,4, 150.0);
@@ -22,7 +22,7 @@ public class MatrixPreparerTest {
         g.addBidirectionalEdge(5,6, 250.0);
         g.addBidirectionalEdge(6,2, 0.0);
         CycleUtil cycleUtil = new CycleUtil(g);
-        List<Graph> cycles = cycleUtil.listAllCycles();
+        List<MyGraph> cycles = cycleUtil.listAllCycles();
         CycleTransform cycleTransform = new CycleTransform(cycles);
         List<List<Edge>> rawCycles = cycleTransform.getCyclesFromGraphs();
         List<List<Edge>> processedCycles = cycleTransform.removeRedundantEdges(rawCycles);
@@ -38,7 +38,7 @@ public class MatrixPreparerTest {
 
     @Test
     public void testFillRow() {
-        Graph g = new Graph();
+        MyGraph g = new MyGraph();
         g.addBidirectionalVoltageEdge(1, 2, 24.0);
         g.addBidirectionalEdge(1,3, 0.0);
         g.addBidirectionalEdge(3,4, 150.0);
@@ -48,7 +48,7 @@ public class MatrixPreparerTest {
         g.addBidirectionalEdge(5,6, 250.0);
         g.addBidirectionalEdge(6,2, 0.0);
         CycleUtil cycleUtil = new CycleUtil(g);
-        List<Graph> cycles = cycleUtil.listAllCycles();
+        List<MyGraph> cycles = cycleUtil.listAllCycles();
         CycleTransform cycleTransform = new CycleTransform(cycles);
         List<List<Edge>> rawCycles = cycleTransform.getCyclesFromGraphs();
         List<List<Edge>> processedCycles = cycleTransform.removeRedundantEdges(rawCycles);
@@ -72,7 +72,7 @@ public class MatrixPreparerTest {
 
     @Test
     public void testFillMatrix() {
-        Graph g = new Graph();
+        MyGraph g = new MyGraph();
         g.addBidirectionalEdge(1,2, 4.0);
         g.addBidirectionalVoltageEdge(1,4, 28.0);
         g.addBidirectionalEdge(2,3, 1.0);
@@ -81,7 +81,7 @@ public class MatrixPreparerTest {
         g.addBidirectionalEdge(4,5, 0.0);
         g.addBidirectionalEdge(5,6, 0.0);
         CycleUtil cycleUtil = new CycleUtil(g);
-        List<Graph> cycles = cycleUtil.listAllCycles();
+        List<MyGraph> cycles = cycleUtil.listAllCycles();
         CycleTransform cycleTransform = new CycleTransform(cycles);
         List<List<Edge>> rawCycles = cycleTransform.getCyclesFromGraphs();
         List<List<Edge>> processedCycles = cycleTransform.removeRedundantEdges(rawCycles);
@@ -98,7 +98,7 @@ public class MatrixPreparerTest {
 
     @Test
     public void testVoltage() {
-        Graph g = new Graph();
+        MyGraph g = new MyGraph();
         g.addBidirectionalEdge(1,2, 4.0);
         g.addBidirectionalVoltageEdge(4,1, 28.0);
         g.addBidirectionalEdge(2,3, 1.0);
@@ -107,7 +107,7 @@ public class MatrixPreparerTest {
         g.addBidirectionalEdge(4,5, 0.0);
         g.addBidirectionalEdge(5,6, 0.0);
         CycleUtil cycleUtil = new CycleUtil(g);
-        List<Graph> cycles = cycleUtil.listAllCycles();
+        List<MyGraph> cycles = cycleUtil.listAllCycles();
         CycleTransform cycleTransform = new CycleTransform(cycles);
         List<List<Edge>> rawCycles = cycleTransform.getCyclesFromGraphs();
         List<List<Edge>> processedCycles = cycleTransform.removeRedundantEdges(rawCycles);
@@ -126,7 +126,7 @@ public class MatrixPreparerTest {
 
     @Test
     public void testVoltage2() {
-        Graph g = new Graph();
+        MyGraph g = new MyGraph();
         g.addBidirectionalVoltageEdge(2, 1, 24.0);
         g.addBidirectionalEdge(1,3, 0.0);
         g.addBidirectionalEdge(3,4, 150.0);
@@ -136,7 +136,7 @@ public class MatrixPreparerTest {
         g.addBidirectionalEdge(5,6, 250.0);
         g.addBidirectionalEdge(6,2, 0.0);
         CycleUtil cycleUtil = new CycleUtil(g);
-        List<Graph> cycles = cycleUtil.listAllCycles();
+        List<MyGraph> cycles = cycleUtil.listAllCycles();
         CycleTransform cycleTransform = new CycleTransform(cycles);
         List<List<Edge>> rawCycles = cycleTransform.getCyclesFromGraphs();
         List<List<Edge>> processedCycles = cycleTransform.removeRedundantEdges(rawCycles);
