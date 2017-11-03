@@ -34,14 +34,14 @@ public class App {
 //        }
 		Graph g = new Graph();
 
-		g.addBidirectionalVoltageEdge(1, 2, 24.0);
-		g.addBidirectionalEdge(1,3, 0.0);
-		g.addBidirectionalEdge(3,4, 150.0);
-		g.addBidirectionalEdge(3,5, 50.0);
-		g.addBidirectionalEdge(4,5, 100.0);
-		g.addBidirectionalEdge(4,6, 300.0);
-		g.addBidirectionalEdge(5,6, 250.0);
-		g.addBidirectionalEdge(6,2, 0.0);
+        g.addBidirectionalVoltageEdge(1, 2, 24.0);
+        g.addBidirectionalEdge(1,2, 4.0);
+        g.addBidirectionalVoltageEdge(1,4, 28.0);
+        g.addBidirectionalEdge(2,3, 1.0);
+        g.addBidirectionalEdge(2,5, 2.0);
+        g.addBidirectionalVoltageEdge(3,6, 7.0);
+        g.addBidirectionalEdge(4,5, 0.0);
+        g.addBidirectionalEdge(5,6, 0.0);
 
 		CycleUtil cycleUtil = new CycleUtil(g);
 		List<Graph> cycles = cycleUtil.listAllCycles();
@@ -56,9 +56,6 @@ public class App {
             }
             System.out.println();
         }
-//		MatrixPreparer matrixPreparer = new MatrixPreparer(processedCycles);
-//		matrixPreparer.fillMap();
-//		Map<Edge, List<CurrentDirection>> edgeCurrentsMap = matrixPreparer.getEdgeCurrentsMap();
 
 	}
 

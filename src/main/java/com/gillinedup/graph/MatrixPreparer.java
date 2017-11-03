@@ -29,19 +29,26 @@ public class MatrixPreparer {
         for (int i = 0; i < cycles.size(); i++) {
             List<Edge> cycle = cycles.get(i);
             for (Edge edge : cycle) {
-                Edge reversedEdge = new Edge(
-                        edge.getDestination(),
-                        edge.getSource(),
-                        edge.getWeight()
-                );
+//                Edge reversedEdge = new Edge(
+//                        edge.getDestination(),
+//                        edge.getSource(),
+//                        edge.getWeight()
+//                );
+//                if (!edgeCurrentsMap.containsKey(edge)) {
+//                    if (!edgeCurrentsMap.containsKey(reversedEdge)) {
+//                        List<CurrentDirection> currentDirections = new ArrayList<>();
+//                        currentDirections.add(new CurrentDirection(i, true, edge.getWeight()));
+//                        edgeCurrentsMap.put(edge, currentDirections);
+//                    } else {
+//                        edgeCurrentsMap.get(reversedEdge).add(new CurrentDirection(i, true, edge.getWeight()));
+//                    }
+//                } else {
+//                    edgeCurrentsMap.get(edge).add(new CurrentDirection(i, true, edge.getWeight()));
+//                }
                 if (!edgeCurrentsMap.containsKey(edge)) {
-                    if (!edgeCurrentsMap.containsKey(reversedEdge)) {
-                        List<CurrentDirection> currentDirections = new ArrayList<>();
-                        currentDirections.add(new CurrentDirection(i, true, edge.getWeight()));
-                        edgeCurrentsMap.put(edge, currentDirections);
-                    } else {
-                        edgeCurrentsMap.get(reversedEdge).add(new CurrentDirection(i, true, edge.getWeight()));
-                    }
+                    List<CurrentDirection> currentDirections = new ArrayList<>();
+                    currentDirections.add(new CurrentDirection(i, true, edge.getWeight()));
+                    edgeCurrentsMap.put(edge, currentDirections);
                 } else {
                     edgeCurrentsMap.get(edge).add(new CurrentDirection(i, true, edge.getWeight()));
                 }
@@ -56,7 +63,7 @@ public class MatrixPreparer {
         }
     }
 
-    private void fillRow(int i) {
+    public void fillRow(int i) {
         List<Edge> currentRow = cycles.get(i);
         for (int j = 0; j < currentRow.size(); j++) {
             Edge currentEdge = currentRow.get(j);
@@ -71,7 +78,7 @@ public class MatrixPreparer {
         }
     }
 
-    private void checkInfoAboutEdge(int i, Edge currentEdge) {
+    public void checkInfoAboutEdge(int i, Edge currentEdge) {
         Edge reversedEdge = new Edge(
                 currentEdge.getDestination(),
                 currentEdge.getSource(),
@@ -80,21 +87,29 @@ public class MatrixPreparer {
         List<CurrentDirection> currents;
         if (edgeCurrentsMap.containsKey(currentEdge)) {
             currents = edgeCurrentsMap.get(currentEdge);
-            CurrentDirection currentDirection;
             for (CurrentDirection current : currents) {
-                matrix[i][current.getCurrentNum()] += current.getWeight();
+                int j = current.getCurrentNum();
+                if (i != j) {
+                    matrix[i][j] += current.getWeight();
+                }
             }
         }
         if (edgeCurrentsMap.containsKey(reversedEdge)) {
             currents = edgeCurrentsMap.get(reversedEdge);
-            CurrentDirection currentDirection;
             for (CurrentDirection current : currents) {
-                matrix[i][current.getCurrentNum()] -= current.getWeight();
+                int j = current.getCurrentNum();
+                if (i != j) {
+                    matrix[i][j] -= current.getWeight();
+                }
             }
         }
     }
 
     public Map<Edge, List<CurrentDirection>> getEdgeCurrentsMap() {
         return edgeCurrentsMap;
+    }
+
+    public double[][] getMatrix() {
+        return matrix;
     }
 }

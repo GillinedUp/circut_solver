@@ -9,6 +9,7 @@ public class Edge {
 	private double weight;
 	private List<CurrentDirection> currents;
 	private boolean isVoltage;
+	private int voltageDirection;
 
 	public Edge(Vertex source, Vertex destination) {
 		this.source = source;
@@ -16,6 +17,7 @@ public class Edge {
 		this.weight = 0.0;
 		this.currents = new ArrayList<>();
 		this.isVoltage = false;
+		this.voltageDirection = 0; // - -> + == > 0; + -> - == < 0
 	}
 
 	public Edge(Vertex source, Vertex destination, double weight) {
@@ -24,9 +26,18 @@ public class Edge {
 		this.weight = weight;
         this.currents = new ArrayList<>();
         this.isVoltage = false;
+        this.voltageDirection = 0;
 	}
 
-	public Vertex getDestination() {
+    public int getVoltageDirection() {
+        return voltageDirection;
+    }
+
+    public void setVoltageDirection(int voltageDirection) {
+        this.voltageDirection = voltageDirection;
+    }
+
+    public Vertex getDestination() {
 		return destination;
 	}
 

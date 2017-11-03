@@ -144,8 +144,10 @@ public class Graph {
 
         Edge edge1 = new Edge(sourceVertex, destinationVertex, w);
         edge1.setVoltage();
+        edge1.setVoltageDirection(1);
         Edge edge2 = new Edge(destinationVertex, sourceVertex, w);
         edge2.setVoltage();
+        edge2.setVoltageDirection(-1);
 
         edges.add(edge1);
         edges.add(edge2);
