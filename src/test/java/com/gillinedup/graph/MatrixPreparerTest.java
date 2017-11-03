@@ -30,7 +30,7 @@ public class MatrixPreparerTest {
         List<List<Edge>> processedCycles = cycleTransform.removeRedundantEdges(rawCycles);
         cycleTransform.sortCyclesByLength(processedCycles);
         cycleTransform.removeRedundantCycles(processedCycles);
-        MatrixPreparer matrixPreparer = new MatrixPreparer(cycleTransform.getCycles());
+        MatrixPreparer matrixPreparer = new MatrixPreparer(processedCycles);
         matrixPreparer.fillMap();
         Map<Edge, List<CurrentDirection>> edgeCurrentsMap = matrixPreparer.getEdgeCurrentsMap();
         List<CurrentDirection> currentDirections1 = edgeCurrentsMap.get(new Edge(new Vertex(5), new Vertex(4)));

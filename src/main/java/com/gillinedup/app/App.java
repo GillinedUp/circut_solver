@@ -1,36 +1,64 @@
 package com.gillinedup.app;
 
 import java.util.List;
+import java.util.Map;
 
 import com.gillinedup.graph.*;
 
 public class App {
 	public static void main(String[] args) {
+//		Graph g = new Graph();
+//
+//		g.addBidirectionalEdge(1,2);
+//		g.addBidirectionalEdge(1,3);
+//		g.addBidirectionalEdge(3,4);
+//		g.addBidirectionalEdge(3,5);
+//		g.addBidirectionalEdge(4,5);
+//		g.addBidirectionalEdge(4,6);
+//		g.addBidirectionalEdge(5,6);
+//		g.addBidirectionalEdge(6,2);
+//
+//		CycleUtil cycleUtil = new CycleUtil(g);
+//		List<Graph> cycles = cycleUtil.listAllCycles();
+//        CycleTransform cycleTransform = new CycleTransform(cycles);
+//        List<List<Edge>> rawCycles = cycleTransform.getCyclesFromGraphs();
+//        List<List<Edge>> processedCycles = cycleTransform.removeRedundantEdges(rawCycles);
+//        cycleTransform.sortCyclesByLength(processedCycles);
+//        cycleTransform.removeRedundantCycles(processedCycles);
+//
+//        for(List<Edge> cycle : processedCycles) {
+//            for (Edge e : cycle) {
+//                System.out.print(e + " ");
+//            }
+//            System.out.println();
+//        }
 		Graph g = new Graph();
 
-		g.addBidirectionalEdge(1,2);
-		g.addBidirectionalEdge(1,3);
-		g.addBidirectionalEdge(3,4);
-		g.addBidirectionalEdge(3,5);
-		g.addBidirectionalEdge(4,5);
-		g.addBidirectionalEdge(4,6);
-		g.addBidirectionalEdge(5,6);
-		g.addBidirectionalEdge(6,2);
+		g.addBidirectionalVoltageEdge(1, 2, 24.0);
+		g.addBidirectionalEdge(1,3, 0.0);
+		g.addBidirectionalEdge(3,4, 150.0);
+		g.addBidirectionalEdge(3,5, 50.0);
+		g.addBidirectionalEdge(4,5, 100.0);
+		g.addBidirectionalEdge(4,6, 300.0);
+		g.addBidirectionalEdge(5,6, 250.0);
+		g.addBidirectionalEdge(6,2, 0.0);
 
 		CycleUtil cycleUtil = new CycleUtil(g);
 		List<Graph> cycles = cycleUtil.listAllCycles();
-        CycleTransform cycleTransform = new CycleTransform(cycles);
-        List<List<Edge>> rawCycles = cycleTransform.getCyclesFromGraphs();
-        List<List<Edge>> processedCycles = cycleTransform.removeRedundantEdges(rawCycles);
-        cycleTransform.sortCyclesByLength(processedCycles);
-        cycleTransform.removeRedundantCycles(processedCycles);
-
+		CycleTransform cycleTransform = new CycleTransform(cycles);
+		List<List<Edge>> rawCycles = cycleTransform.getCyclesFromGraphs();
+		List<List<Edge>> processedCycles = cycleTransform.removeRedundantEdges(rawCycles);
+		cycleTransform.sortCyclesByLength(processedCycles);
+		cycleTransform.removeRedundantCycles(processedCycles);
         for(List<Edge> cycle : processedCycles) {
             for (Edge e : cycle) {
                 System.out.print(e + " ");
             }
             System.out.println();
         }
+//		MatrixPreparer matrixPreparer = new MatrixPreparer(processedCycles);
+//		matrixPreparer.fillMap();
+//		Map<Edge, List<CurrentDirection>> edgeCurrentsMap = matrixPreparer.getEdgeCurrentsMap();
 
 	}
 
