@@ -89,7 +89,7 @@ public class MatrixPreparer {
         }
     }
 
-    public Map<Edge, List<CurrentDirection>> getEdgeCurrentsMap() {
+    public LinkedHashMap<Edge, List<CurrentDirection>> getEdgeCurrentsMap() {
         return edgeCurrentsMap;
     }
 
