@@ -23,7 +23,6 @@ public class CycleTransform {
     }
 
     public List<List<Edge>> removeRedundantEdges(List<List<Edge>> rawCycles) {
-
         int currentSourceId = 0;
         int currentDestinationId = 0;
         List<List<Edge>> resultCycles = new ArrayList<>();

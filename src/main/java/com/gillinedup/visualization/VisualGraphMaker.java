@@ -12,18 +12,15 @@ import java.util.*;
 public class VisualGraphMaker {
     private Graph<Vertex, Edge> resultGraph;
     private List<Vertex> vertices;
-    private List<List<Edge>> cycles;
     private Matrix b;
     private LinkedHashMap<Edge, List<CurrentDirection>> edgeCurrentsMap;
 
     public VisualGraphMaker(
-            List<List<Edge>> cycles,
             Matrix b,
             List<Vertex> vertices,
             LinkedHashMap<Edge, List<CurrentDirection>> edgeCurrentsMap
     )
     {
-        this.cycles = cycles;
         this.b = b;
         resultGraph = new DirectedSparseGraph<>();
         this.vertices = vertices;
