@@ -4,18 +4,13 @@ import java.util.*;
 
 public class CycleTransform {
     private List<MyGraph> cyclesAsGraphList;
-    private List<List<Edge>> cycles;
 
     public CycleTransform(List<MyGraph> cyclesList) {
         this.cyclesAsGraphList = cyclesList;
     }
 
-    public List<List<Edge>> getCycles() {
-        return cycles;
-    }
-
     public List<List<Edge>> getCyclesFromGraphs() {
-        this.cycles = new ArrayList<>();
+        List<List<Edge>> cycles = new ArrayList<>();
         for(MyGraph g : cyclesAsGraphList) {
             cycles.add(g.getEdges());
         }
@@ -23,8 +18,8 @@ public class CycleTransform {
     }
 
     public List<List<Edge>> removeRedundantEdges(List<List<Edge>> rawCycles) {
-        int currentSourceId = 0;
-        int currentDestinationId = 0;
+        int currentSourceId;
+        int currentDestinationId;
         List<List<Edge>> resultCycles = new ArrayList<>();
         for (int i = 0; i < rawCycles.size(); i++) {
             List<Edge> currentRawCycle = rawCycles.get(i);
@@ -49,10 +44,10 @@ public class CycleTransform {
                         break;
                     }
                 }
-                for (int j = 0; j < currentRawCycle.size(); j++) {
-                    if(currentRawCycle.get(j).getSource().getId() == currentDestinationId) {
-                        currentSourceId = currentRawCycle.get(j).getSource().getId();
-                        currentDestinationId = currentRawCycle.get(j).getDestination().getId();
+                for (Edge aCurrentRawCycle : currentRawCycle) {
+                    if (aCurrentRawCycle.getSource().getId() == currentDestinationId) {
+                        currentSourceId = aCurrentRawCycle.getSource().getId();
+                        currentDestinationId = aCurrentRawCycle.getDestination().getId();
                         break;
                     }
                 }
@@ -83,7 +78,7 @@ public class CycleTransform {
         }
     }
 
-    public boolean isNewEdge(Set<Edge> appearedEdgesSet, Edge e) {
+    boolean isNewEdge(Set<Edge> appearedEdgesSet, Edge e) {
         return !(appearedEdgesSet.contains(e) ||
                 appearedEdgesSet.contains(new Edge(e.getDestination(), e.getSource())));
     }

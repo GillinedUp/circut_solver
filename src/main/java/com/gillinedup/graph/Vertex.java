@@ -1,28 +1,13 @@
 package com.gillinedup.graph;
 
-import java.awt.Point;
-
 public class Vertex {
-	final private String label;
-	final private Point data;
 	private int id;
 
-	public Vertex(String id, Point data) {
-		this.label = id;
-		this.data = data;
-	}
-
-	public Vertex(int id) {
+	Vertex(int id) {
 	    this.id = id;
-	    this.label = Integer.toString(id);
-	    data = null;
     }
 
-	public String getLabel() {
-		return label;
-	}
-
-	public int getId() {
+	int getId() {
 	    return this.id;
     }
 

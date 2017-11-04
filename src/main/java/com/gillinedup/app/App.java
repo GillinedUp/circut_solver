@@ -11,14 +11,16 @@ public class App {
 	public static void main(String[] args) {
 		MyGraph g = new MyGraph();
 
-        g.addBidirectionalVoltageEdge(2, 1, 24.0);
-        g.addBidirectionalEdge(1,3, 0.0);
-        g.addBidirectionalEdge(3,4, 150.0);
-        g.addBidirectionalEdge(3,5, 50.0);
-        g.addBidirectionalEdge(4,5, 100.0);
-        g.addBidirectionalEdge(4,6, 300.0);
-        g.addBidirectionalEdge(5,6, 250.0);
-        g.addBidirectionalEdge(6,2, 0.0);
+        g.addBidirectionalEdge(1, 2, 7.0);
+        g.addBidirectionalVoltageEdge(7, 1, 300.0);
+        g.addBidirectionalEdge(2, 3, 2.0);
+        g.addBidirectionalEdge(2, 4, 5.0);
+        g.addBidirectionalEdge(3, 5, 4.0);
+        g.addBidirectionalEdge(3, 6, 6.0);
+        g.addBidirectionalEdge(4, 5, 1.0);
+        g.addBidirectionalEdge(4, 6, 11.0);
+        g.addBidirectionalEdge(5, 6, 9.0);
+        g.addBidirectionalEdge(6, 7, 0.0);
 
 //        g.addBidirectionalEdge(1,2, 4.0);
 //        g.addBidirectionalVoltageEdge(1,4, 28.0);

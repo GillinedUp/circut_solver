@@ -28,10 +28,10 @@ public class MatrixPreparer {
             for (Edge edge : cycle) {
                 if (!edgeCurrentsMap.containsKey(edge)) {
                     List<CurrentDirection> currentDirections = new ArrayList<>();
-                    currentDirections.add(new CurrentDirection(i, true, edge.getWeight()));
+                    currentDirections.add(new CurrentDirection(i, edge.getWeight()));
                     edgeCurrentsMap.put(edge, currentDirections);
                 } else {
-                    edgeCurrentsMap.get(edge).add(new CurrentDirection(i, true, edge.getWeight()));
+                    edgeCurrentsMap.get(edge).add(new CurrentDirection(i, edge.getWeight()));
                 }
 
             }

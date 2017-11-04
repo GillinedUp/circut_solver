@@ -1,6 +1,5 @@
 package com.gillinedup.graph;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -15,8 +14,8 @@ public class MyGraph {
 	 * 
 	 */
 	public MyGraph() {
-		vertices = new ArrayList<Vertex>();
-		edges = new ArrayList<Edge>();
+		vertices = new ArrayList<>();
+		edges = new ArrayList<>();
 	}
 
 	/**
@@ -94,23 +93,23 @@ public class MyGraph {
 	 * @param dest
 	 *            <code>Point</code> data for destination <code>Vertex</code>
 	 */
-	public void addBidirectionalEdge(Point src, Point dest) {
-		Vertex sourceVertex = new Vertex("Vertex (" + src.getX() + "," + src.getY() + ")", src);
-		Vertex destinationVertex = new Vertex("Vertex (" + dest.getX() + "," + dest.getY() + ")", dest);
+//	public void addBidirectionalEdge(Point src, Point dest) {
+//		Vertex sourceVertex = new Vertex("Vertex (" + src.getX() + "," + src.getY() + ")", src);
+//		Vertex destinationVertex = new Vertex("Vertex (" + dest.getX() + "," + dest.getY() + ")", dest);
+//
+//		if (!vertices.contains(sourceVertex)) {
+//			vertices.add(sourceVertex);
+//		}
+//
+//		if (!vertices.contains(destinationVertex)) {
+//			vertices.add(destinationVertex);
+//		}
+//
+//		edges.add(new Edge(sourceVertex, destinationVertex));
+//		edges.add(new Edge(destinationVertex, sourceVertex));
+//	}
 
-		if (!vertices.contains(sourceVertex)) {
-			vertices.add(sourceVertex);
-		}
-
-		if (!vertices.contains(destinationVertex)) {
-			vertices.add(destinationVertex);
-		}
-
-		edges.add(new Edge(sourceVertex, destinationVertex));
-		edges.add(new Edge(destinationVertex, sourceVertex));
-	}
-
-	public void addBidirectionalEdge(int id1, int id2) {
+	void addBidirectionalEdge(int id1, int id2) {
         addBidirectionalEdge(id1, id2, 0.0);
 	}
 
