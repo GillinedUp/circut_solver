@@ -51,7 +51,8 @@ public class VisualGraphMaker {
                         result += b.get(i, 0);
                     }
                     if(edgeCurrentsMap.containsKey(reversedEdge)) {
-                        List<CurrentDirection> otherDirections = edgeCurrentsMap.get(reversedEdge);
+                        List<CurrentDirection> otherDirections =
+                            edgeCurrentsMap.get(reversedEdge);
                         for (CurrentDirection direction : otherDirections) {
                             int i = direction.getCurrentNum();
                             result -= b.get(i, 0);

@@ -8,7 +8,7 @@ import java.util.Set;
 public class MyGraph {
 	private final List<Vertex> vertices;
 	private final List<Edge> edges;
-    
+
 	public MyGraph() {
 		vertices = new ArrayList<>();
 		edges = new ArrayList<>();
