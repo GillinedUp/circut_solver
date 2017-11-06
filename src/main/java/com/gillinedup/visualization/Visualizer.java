@@ -28,7 +28,7 @@ public class Visualizer {
         basicVisualizationServer
                 .getRenderContext()
                 .setVertexLabelTransformer(Vertex::toString);
-        basicVisualizationServer.setPreferredSize(new Dimension(900, 700));
+        basicVisualizationServer.setPreferredSize(new Dimension(1900, 1700));
     }
 
     public void initializeFrame() {
